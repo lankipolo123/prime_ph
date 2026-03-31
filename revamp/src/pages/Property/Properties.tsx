@@ -239,9 +239,11 @@ export default function PropertiesPage() {
       <Filters
         filters={filters}
         onFilterChange={handleFilterChange}
-        onAdd={handleAddProperty} onDebouncedSearchChange={function (_value: string): void {
-          throw new Error("Function not implemented.");
-        } }      />
+        onAdd={handleAddProperty}
+        onDebouncedSearchChange={(value: string) =>
+          setFilters((prev) => ({ ...prev, searchQuery: value }))
+        }
+      />
 
       {/* Category Sections */}
       <main className="max-w-6xl mx-auto py-12 px-4 space-y-16">

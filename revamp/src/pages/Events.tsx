@@ -13,8 +13,16 @@ interface TimeLeft {
   seconds: number;
 }
 
+interface ContactForm {
+  name: string;
+  phone: string;
+  email: string;
+}
+
 export const Events = (): JSX.Element => {
   const [currentEventIndex, setCurrentEventIndex] = useState<number>(0);
+  const [contactForm, setContactForm] = useState<ContactForm>({ name: "", phone: "", email: "" });
+  const [formSubmitted, setFormSubmitted] = useState<boolean>(false);
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({
     days: 20,
     hours: 22,
@@ -180,39 +188,64 @@ export const Events = (): JSX.Element => {
                 Need help with something? Get in touch with our friendly team
                 and we'll get in touch within 2 hours.
               </p>
-              <form className="space-y-6">
-                <div>
-                  <Input
-                    id="name"
-                    type="text"
-                    placeholder="Jane Smith"
-                    className="w-full bg-gray-50 border border-gray-300 rounded-lg px-4 py-4 text-[var(--color-PRIMEblack)] focus:ring-blue-500 focus:border-blue-500 text-base"
-                  />
+              {formSubmitted ? (
+                <div className="text-center py-8">
+                  <p className="text-xl font-semibold text-[var(--color-PRIMEblue)] gotham-bold">
+                    Thank you for reaching out!
+                  </p>
+                  <p className="text-[var(--color-PRIMEgray)] mt-2 gotham-book">
+                    Our team will get back to you within 2 hours.
+                  </p>
                 </div>
-                <div>
-                  <Input
-                    id="phone"
-                    type="tel"
-                    placeholder="+63"
-                    className="w-full bg-gray-50 border border-gray-300 rounded-lg px-4 py-4 text-[var(--color-PRIMEblack)] focus:ring-blue-500 focus:border-blue-500 text-base"
-                  />
-                </div>
-                <div>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="jana@framer.com"
-                    className="w-full bg-gray-50 border border-gray-300 rounded-lg px-4 py-4 text-[var(--color-PRIMEblack)] focus:ring-blue-500 focus:border-blue-500 text-base"
-                  />
-                </div>
-                <Button
-                  type="submit"
-                  className="w-full bg-[var(--color-PRIMEblack)] text-[var(--color-PRIMEwhite)] font-semibold py-4 rounded-lg hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-[var(--color-PRIMEblack)] focus:ring-opacity-50 text-lg"
-                  onClick={(e: React.MouseEvent<HTMLButtonElement>) => e.preventDefault()}
+              ) : (
+                <form
+                  className="space-y-6"
+                  onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
+                    e.preventDefault();
+                    setFormSubmitted(true);
+                  }}
                 >
-                  Submit
-                </Button>
-              </form>
+                  <div>
+                    <Input
+                      id="name"
+                      type="text"
+                      placeholder="Jane Smith"
+                      value={contactForm.name}
+                      onChange={(e) => setContactForm((prev) => ({ ...prev, name: e.target.value }))}
+                      required
+                      className="w-full bg-gray-50 border border-gray-300 rounded-lg px-4 py-4 text-[var(--color-PRIMEblack)] focus:ring-blue-500 focus:border-blue-500 text-base"
+                    />
+                  </div>
+                  <div>
+                    <Input
+                      id="phone"
+                      type="tel"
+                      placeholder="+63"
+                      value={contactForm.phone}
+                      onChange={(e) => setContactForm((prev) => ({ ...prev, phone: e.target.value }))}
+                      required
+                      className="w-full bg-gray-50 border border-gray-300 rounded-lg px-4 py-4 text-[var(--color-PRIMEblack)] focus:ring-blue-500 focus:border-blue-500 text-base"
+                    />
+                  </div>
+                  <div>
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="jana@framer.com"
+                      value={contactForm.email}
+                      onChange={(e) => setContactForm((prev) => ({ ...prev, email: e.target.value }))}
+                      required
+                      className="w-full bg-gray-50 border border-gray-300 rounded-lg px-4 py-4 text-[var(--color-PRIMEblack)] focus:ring-blue-500 focus:border-blue-500 text-base"
+                    />
+                  </div>
+                  <Button
+                    type="submit"
+                    className="w-full bg-[var(--color-PRIMEblack)] text-[var(--color-PRIMEwhite)] font-semibold py-4 rounded-lg hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-[var(--color-PRIMEblack)] focus:ring-opacity-50 text-lg"
+                  >
+                    Submit
+                  </Button>
+                </form>
+              )}
             </div>
             <div className="w-full md:w-1/2 hidden md:block">
               <img

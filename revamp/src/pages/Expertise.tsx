@@ -57,14 +57,24 @@ const ExpertisePage = () => {
     2: <p>We provide in-depth research and advisory services for smarter real estate decisions.</p>,
     3: <p>Maximize leasing potential and profitability with our expert insights and strategies.</p>,
     4: (
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipiscing elit... (placeholder long text)
-      </p>
+      <div className="space-y-4">
+        <p className="text-PRIMEgray">
+          The Seasoned program is designed for established property owners and investors looking to optimize the performance of their existing real estate assets. Our team of experts provides strategic guidance on asset repositioning, lease restructuring, and capital improvements to maximize returns.
+        </p>
+        <p className="text-PRIMEgray">
+          Whether you are managing a single commercial building or a diversified portfolio, we offer tailored solutions backed by deep market knowledge and decades of experience in the Philippine real estate landscape.
+        </p>
+      </div>
     ),
     5: (
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipiscing elit... (placeholder long text)
-      </p>
+      <div className="space-y-4">
+        <p className="text-PRIMEgray">
+          The Accelerate program is built for high-growth businesses and developers seeking to fast-track their real estate objectives. We provide end-to-end support from site selection and transaction management to market entry strategy and portfolio expansion.
+        </p>
+        <p className="text-PRIMEgray">
+          With access to PRIME Philippines' extensive network and proprietary market data, clients in the Accelerate program gain a competitive advantage in securing prime commercial spaces and unlocking new opportunities at speed.
+        </p>
+      </div>
     ),
   };
 
